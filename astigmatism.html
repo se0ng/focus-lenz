@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乱視 - 見え方図鑑</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="detail">
+    <header class="header">
+        <h1 class="logo">
+            <a href="#">
+                <img src="img/logo_ClrZ_minimal.png" alt="clrzロゴ">
+            </a>
+        </h1>
+
+        <nav class="nav">
+            <ul class="menu">
+                <li><a href="index.html">ホーム</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="focus">
+            <img id="targetImg" src="img/g-night.png" alt="" class="img">
+
+            <div class="controls">
+                <div class="glass-lenz" role="button" tabindex="0"></div>
+                <div class="full-btn" role="button" tabindex="0"></div>
+            </div>
+
+
+            <div class="modal" id="imgModal">
+                <img id="modalImg" src="img/g-night.png" alt="">
+
+                <div class="modal-controls">
+                    <div class="glass-lenz" role="button" tabindex="0"></div>
+                    <div class="full-btn" role="button" tabindex="0"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="txt-box">
+            <div class="box">
+                <h2 class="name">【 乱視 】</h2>
+                <p class="dl-txt">
+                    角膜や水晶体がラグビーボールのような楕円形になっているために、目に入った光が網膜上で一つの点に集まらず、物がぼやけて見えたり、二重に見えたりする状態です。
+                </p>
+            </div>
+            <div class="box">
+                <h2 class="name">治療法</h2>
+                <div class="way">
+                    <dl class="dl">
+                        <dt>矯正</dt>
+                        <dd>眼鏡やコンタクトレンズによる矯正。</dd>
+                        <!--  -->
+                        <dt>レーシック手術</dt>
+                        <dd>レーザーで角膜を削る。</dd>
+                        <!--  -->
+                        <dt>眼内レンズ（ ICL ）</dt>
+                        <dd>目の内部にレンズを挿入します。高度な乱視に対応できる場合があります。</dd>
+                        <!--  -->
+                        <dt>角膜移植</dt>
+                        <dd>ハードコンタクトレンズでも矯正できない強い不正乱視などの場合に検討されることがあります。</dd>
+                        <!--  -->
+                        <dt>角膜切開術</dt>
+                        <dd>白内障手術後の傷口が原因で乱視が起きている場合に、傷口を一部切開して乱視を矯正します。</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-txt">&copy; 2025 ColorZ All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const blurBtns = document.querySelectorAll('.glass-lenz');
+            const img = document.getElementById('targetImg');
+            const modalImg = document.getElementById('modalImg');
+            const modal = document.getElementById('imgModal');
+
+            function toggleBlur(e) {
+                e.stopPropagation();
+                img.classList.toggle('astigmatism');
+                modalImg.classList.toggle('astigmatism');
+            }
+
+            blurBtns.forEach(btn => {
+                btn.addEventListener('click', toggleBlur);
+            });
+
+            document.querySelector('.full-btn')?.addEventListener('click', () => {
+                modal.classList.add('active');
+
+                modalImg.classList.toggle(
+                    'astigmatism',
+                    img.classList.contains('astigmatism')
+                );
+            });
+
+            modal.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
